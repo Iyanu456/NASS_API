@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const post_route = require('./routes/post');
@@ -21,15 +22,11 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-app.get('/', (req, res) => {
-    try {
-        res.json({ message: 'Hello World!' });
-        
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ message: 'Server Error' });
-    }
-})
+app.use(cors({
+  origin: '*',  // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 app.use('/api/posts', post_route);
 app.use('/api', auth_route);
@@ -39,4 +36,4 @@ app.use('/api/courses', course_route);
 app.use('/api/departments', department_route);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, console.log(`server listening on port ${PORT}`));
+app.listen(PORT, console.log(`Server listening on port ${PORT}`));

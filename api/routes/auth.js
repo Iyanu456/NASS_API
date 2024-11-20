@@ -59,7 +59,7 @@ router.post("/signin", async (req, res) => {
     }
 
     // Generate a token
-    const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id, role: user.role }, SECRET_KEY, { expiresIn: "48h" });
 
     // Return the token with a standardized response
     res.status(200).json({ ok: true, msg: "Sign in successful", token });

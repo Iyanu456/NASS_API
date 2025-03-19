@@ -28,7 +28,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ["*", "https://nass-oau-chapter.netlify.app"],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

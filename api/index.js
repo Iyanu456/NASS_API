@@ -26,7 +26,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-app.options("*", cors());
+//app.options("*", cors());
 
 app.use(
   cors({
